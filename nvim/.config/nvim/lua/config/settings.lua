@@ -1,3 +1,6 @@
+-- Colorscheme
+vim.cmd[[colorscheme catppuccin]]
+
 -- Lines
 vim.o.nu = true
 vim.o.rnu = true
