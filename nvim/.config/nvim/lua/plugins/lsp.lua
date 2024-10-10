@@ -1,52 +1,55 @@
+local lsp_servers = {
+    'lua_ls',
+    'pyright',
+    'ts_ls',
+}
+
+local nonels_servers = {
+    'mypy',
+    'black',
+}
+
+local config = function()
+    local mason = require('mason')
+    local mason_lspconfig = require('mason-lspconfig')
+    local lspconfig = require('lspconfig')
+    local mason_nonels = require('mason-null-ls')
+    local none_ls = require('null-ls')
+
+
+    mason.setup()
+
+    -- LSPs
+    mason_lspconfig.setup({ ensure_installed = lsp_servers })
+    lspconfig.lua_ls.setup({})
+    lspconfig.pyright.setup({})
+    lspconfig.ts_ls.setup({})
+
+    -- NoneLSs
+    mason_nonels.setup({ ensure_installed = nonels_servers })
+    none_ls.setup({
+	sources = {
+	    none_ls.builtins.formatting.stylua,
+	    none_ls.builtins.completion.spell,
+	}
+    })
+
+    -- Keymaps
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+end
+
 return {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
     {
-	"jay-babu/mason-null-ls.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	"williamboman/mason.nvim",
 	dependencies = {
-	    "williamboman/mason.nvim",
+	    "williamboman/mason-lspconfig.nvim",
+	    "neovim/nvim-lspconfig",
 	    "nvimtools/none-ls.nvim",
+	    "jay-babu/mason-null-ls.nvim",
 	},
-	config = function()
-	    require("mason-null-ls").setup({
-		ensure_installed = { 
-		    "stylua", 
-		    "mypy", 
-		    "black",
-		}
-	    })
-	end,
+	lazy = false,
+	config = config     
     },
-    {
-	"neovim/nvim-lspconfig",
-	dependencies = {
-	    "nvimtools/none-ls.nvim",
-	},
-	config = function()
-	    require("mason").setup()
-	    require("mason-lspconfig").setup({
-		ensure_installed = {
-		    "lua_ls",
-		    "pyright",
-		    "ts_ls",
-		}
-	    })
-	    local null_ls = require("null-ls")
-	    local lspconfig = require("lspconfig")
-
-	    null_ls.setup({
-		sources = {
-		    null_ls.builtins.formatting.stylua,
-		    null_ls.builtins.completion.spell,
-		},
-	    })
-
-	    lspconfig.pyright.setup{}
-
-	    vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-	    vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-	    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
-	end
-    }
 }
