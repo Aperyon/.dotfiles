@@ -17,7 +17,7 @@ vim.diagnostic.config({
 	virtual_text = true,
 	float = {
 		show_header = true,
-		source = 'if_many',
+		source = 'always',
 		border = 'rounded',
 		focusable = false,
 	},
