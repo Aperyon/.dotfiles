@@ -10,6 +10,9 @@ vim.o.colorcolumn = "79"
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 
+-- Other configs
+vim.o.wrap = false
+
 -- Diagnostics
 vim.diagnostic.config({
 	underline = true,

@@ -72,6 +72,8 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions)
 
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
