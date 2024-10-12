@@ -13,6 +13,9 @@ return {
 				"json",
 				"markdown",
 				"css",
+			},
+			highlight = {
+				enable = true
 			}
 		}
 	end

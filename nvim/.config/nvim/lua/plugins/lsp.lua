@@ -7,6 +7,7 @@ local lsp_servers = {
 local nonels_servers = {
 	'mypy',
 	'black',
+	'stylua',
 }
 
 
@@ -100,7 +101,7 @@ return {
 			"jay-babu/mason-null-ls.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			'hrsh7th/cmp-buffer',
-			'hrsh7th/nvim-cmp'
+			'hrsh7th/nvim-cmp',
 		},
 		lazy = false,
 		config = config
