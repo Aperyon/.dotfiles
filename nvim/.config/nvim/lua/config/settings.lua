@@ -1,5 +1,5 @@
 -- Colorscheme
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd([[colorscheme rose-pine]])
 
 -- Lines
 vim.o.nu = true
@@ -20,8 +20,8 @@ vim.diagnostic.config({
 	virtual_text = true,
 	float = {
 		show_header = true,
-		source = 'always',
-		border = 'rounded',
+		source = "always",
+		border = "rounded",
 		focusable = false,
 	},
 	update_in_insert = false, -- default to false

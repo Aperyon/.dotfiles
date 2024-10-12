@@ -62,3 +62,4 @@ export PATH="/Users/aperyon/.local/bin:$PATH"
 
 alias ls="ls --color"
 alias ll="ls -lahc"
+alias ns="NVIM_APPNAME=nvim-slim nvim"

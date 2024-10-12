@@ -1,8 +1,8 @@
 return {
-	'nvim-treesitter/nvim-treesitter',
+	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	config = function()
-		require 'nvim-treesitter.configs'.setup {
+		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
 				"lua",
 				"html",
@@ -15,8 +15,8 @@ return {
 				"css",
 			},
 			highlight = {
-				enable = true
-			}
-		}
-	end
+				enable = true,
+			},
+		})
+	end,
 }
