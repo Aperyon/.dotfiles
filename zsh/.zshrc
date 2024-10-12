@@ -61,3 +61,4 @@ eval "$(pyenv init -)"
 export PATH="/Users/aperyon/.local/bin:$PATH"
 
 alias ls="ls --color"
+alias ll="ls -lahc"
