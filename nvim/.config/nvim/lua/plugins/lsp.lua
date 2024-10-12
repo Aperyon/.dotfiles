@@ -33,6 +33,7 @@ local config = function()
 		},
 		sources = cmp.config.sources({
 			{ name = 'nvim_lsp' },
+			{ name = 'buffer' },
 		}),
 	})
 
@@ -47,7 +48,6 @@ local config = function()
 			none_ls.builtins.formatting.stylua,
 			none_ls.builtins.formatting.black,
 			none_ls.builtins.diagnostics.mypy,
-			none_ls.builtins.completion.spell,
 		},
 		on_attach = function(client, bufnr)
 			if client.supports_method("textDocument/formatting") then
