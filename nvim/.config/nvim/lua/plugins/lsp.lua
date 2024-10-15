@@ -1,45 +1,43 @@
 local lsp_servers = {
-	'lua_ls',
-	'pyright',
-	'ts_ls',
+	"lua_ls",
+	"pyright",
+	"ts_ls",
 }
 
 local nonels_servers = {
-	'mypy',
-	'black',
-	'stylua',
+	"black",
+	"stylua",
+	"prettier",
 }
 
-
 local config = function()
-	local mason = require('mason')
-	local mason_lspconfig = require('mason-lspconfig')
-	local lspconfig = require('lspconfig')
-	local mason_nonels = require('mason-null-ls')
-	local none_ls = require('null-ls')
-	local cmp = require 'cmp'
+	local mason = require("mason")
+	local mason_lspconfig = require("mason-lspconfig")
+	local lspconfig = require("lspconfig")
+	local mason_nonels = require("mason-null-ls")
+	local none_ls = require("null-ls")
+	local cmp = require("cmp")
 
 	-- AutoCompletion
 	cmp.setup({
 		mapping = cmp.mapping.preset.insert({
-			['<C-b>'] = cmp.mapping.scroll_docs(-4),
-			['<C-f>'] = cmp.mapping.scroll_docs(4),
-			['<C-Space>'] = cmp.mapping.complete(),
-			['<C-e>'] = cmp.mapping.abort(),
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
+			["<C-b>"] = cmp.mapping.scroll_docs(-4),
+			["<C-f>"] = cmp.mapping.scroll_docs(4),
+			["<C-Space>"] = cmp.mapping.complete(),
+			["<C-e>"] = cmp.mapping.abort(),
+			["<CR>"] = cmp.mapping.confirm({ select = true }),
 		}),
 		window = {
 			completion = cmp.config.window.bordered(),
 			documentation = cmp.config.window.bordered(),
 		},
 		sources = cmp.config.sources({
-			{ name = 'nvim_lsp' },
-			{ name = 'buffer' },
+			{ name = "nvim_lsp" },
+			{ name = "buffer" },
 		}),
 	})
 
 	mason.setup()
-
 
 	-- NoneLSs
 	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -48,7 +46,7 @@ local config = function()
 		sources = {
 			none_ls.builtins.formatting.stylua,
 			none_ls.builtins.formatting.black,
-			none_ls.builtins.diagnostics.mypy,
+			none_ls.builtins.formatting.prettier,
 		},
 		on_attach = function(client, bufnr)
 			if client.supports_method("textDocument/formatting") then
@@ -64,31 +62,30 @@ local config = function()
 		end,
 	})
 
-
 	-- LSPs
-	local capabilities = require('cmp_nvim_lsp').default_capabilities()
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	mason_lspconfig.setup({ ensure_installed = lsp_servers })
 	lspconfig.lua_ls.setup({
 		capabilities = capabilities,
 		settings = {
 			Lua = {
 				diagnostics = {
-					globals = { 'vim' }
-				}
-			}
-		}
+					globals = { "vim" },
+				},
+			},
+		},
 	})
 	lspconfig.pyright.setup({
-		capabilities = capabilities
+		capabilities = capabilities,
 	})
 	lspconfig.ts_ls.setup({
-		capabilities = capabilities
+		capabilities = capabilities,
 	})
 	-- Keymaps
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-	vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-	vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format)
-	vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references)
+	vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 end
 
 return {
@@ -100,10 +97,10 @@ return {
 			"nvimtools/none-ls.nvim",
 			"jay-babu/mason-null-ls.nvim",
 			"hrsh7th/cmp-nvim-lsp",
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/nvim-cmp',
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/nvim-cmp",
 		},
 		lazy = false,
-		config = config
+		config = config,
 	},
 }

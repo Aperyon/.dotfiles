@@ -1,5 +1,5 @@
 -- Colorscheme
-vim.cmd([[colorscheme rose-pine]])
+vim.cmd([[colorscheme farout-night]])
 
 -- Lines
 vim.o.nu = true
