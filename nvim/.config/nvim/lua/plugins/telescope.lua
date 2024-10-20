@@ -21,5 +21,6 @@ return {
 			{ desc = "Telescope buffers" }
 		)
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+		vim.keymap.set("n", "<leader>ft", builtin.tags, { desc = "Telescope find tags" })
 	end,
 }
